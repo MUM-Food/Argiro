@@ -1,0 +1,9 @@
+com\mum\domain\Student.class
+com\mum\service\FoodMenuServiceImpl.class
+com\mum\service\AbstractService.class
+com\mum\domain\FoodMenu.class
+com\mum\dao\SessionUtil.class
+com\mum\controller\HomeController.class
+com\mum\service\FoodMenuService.class
+com\mum\dao\FoodMenuFacadeLocal.class
+com\mum\dao\FoodMenuFacade.class
