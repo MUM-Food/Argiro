@@ -17,4 +17,7 @@ public interface ProductRepositoryLocal {
     List<Product> getAllProducts();
 
     public Product getProductById(String productID);
+    
+      List<Product> getAllProductsDetails();
+    
 }

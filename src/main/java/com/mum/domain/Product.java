@@ -5,14 +5,32 @@
  */
 package com.mum.domain;
 
+import com.mum.utils.SessionUtil;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author sunil
  */
-public class Product {
+@Entity
+public class Product implements Serializable{
+    private static final long serialVersionUID=2L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @Size(max = 255)
+    @Column(name = "product_id")
     private String productId;
     private String name;
     private BigDecimal unitPrice;
@@ -22,7 +40,7 @@ public class Product {
     private long unitsInStock;
     private long unitsInOrder;
     private boolean discontinued;
-    private String condition;
+    //private String condition;
 
     public Product() {
         super();
@@ -142,12 +160,13 @@ public class Product {
         this.discontinued = discontinued;
     }
 
-    public String getCondition() {
-        return condition;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition;
+    public void setId(Integer id) {
+        this.id = id;
     }
+    
     
 }

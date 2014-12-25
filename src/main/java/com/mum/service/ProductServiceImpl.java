@@ -10,12 +10,14 @@ import com.mum.domain.Product;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author sunil
  */
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
@@ -29,6 +31,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(String productID) {
         return productRepository.getProductById(productID);
+    }
+
+    @Override
+    public List<Product> getAllProductsDetails() {
+       return productRepository.getAllProductsDetails();
     }
 
 }

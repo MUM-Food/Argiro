@@ -5,6 +5,7 @@
  */
 package com.mum.dao;
 
+import com.mum.utils.SessionUtil;
 import com.mum.domain.FoodMenu;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Repository;
   
 public class FoodMenuFacade extends SessionUtil implements FoodMenuFacadeLocal{
     
-      public void create(FoodMenu foodMenu){
+     public void create(FoodMenu foodMenu){
          getSession().save(foodMenu);
     }
 
