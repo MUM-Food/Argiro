@@ -64,4 +64,10 @@ public class ProductRepository extends SessionUtil implements ProductRepositoryL
         return products;
     }
 
+    @Override
+    public boolean addProduct(Product product) {
+        getSession().save(product);
+        return true;
+    }
+
 }

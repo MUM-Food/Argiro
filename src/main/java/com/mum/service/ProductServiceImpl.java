@@ -43,4 +43,9 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.getProductsByCategory(category);
     }
 
+    @Override
+    public boolean addProduct(Product product) {
+        return productRepository.addProduct(product);
+    }
+
 }

@@ -21,5 +21,7 @@ public interface ProductRepositoryLocal {
       List<Product> getAllProductsDetails();
       
       public List<Product> getProductsByCategory(String category);
+      
+      boolean addProduct(Product product);
     
 }

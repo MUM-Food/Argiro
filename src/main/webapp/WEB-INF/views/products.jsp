@@ -63,10 +63,7 @@
                                         <span class="glyphicon-shopping-cart glyphicon"></span> 
                                         Order Now
                                     </a>
-                                </p>
-                                <a href="<spring:url value="/products" />" class="btn btndefault">
-                                    <span class="glyphicon-hand-left glyphicon"></span> back
-                                </a>
+                                </p>                               
                             </div>
                         </div>
                     </div>

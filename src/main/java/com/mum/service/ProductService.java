@@ -21,4 +21,6 @@ public interface ProductService {
     public List<Product> getAllProductsDetails(); 
     
     public List<Product> getProductsByCategory(String category);
+    
+    public boolean addProduct(Product product);
 }

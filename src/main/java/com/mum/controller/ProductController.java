@@ -5,12 +5,15 @@
  */
 package com.mum.controller;
 
+import com.mum.domain.Product;
 import com.mum.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -24,7 +27,7 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping("/products")
-    public String list(Model model) {    
+    public String list(Model model) { 
         model.addAttribute("products",productService.getAllProductsDetails());
         return "products";
     }
@@ -42,6 +45,19 @@ public class ProductController {
         System.out.println("Product  id is "+productId);
         model.addAttribute("product",productService.getProductById(productId));
         return "product";
+    }
+    
+    @RequestMapping(value="/products/add",method = RequestMethod.GET)
+    public String getAddNewProductForm(Model model){
+        Product product=new Product();
+        model.addAttribute("newProduct",product);
+        return "addProduct";
+    }
+    
+    @RequestMapping(value = "/products/add",method = RequestMethod.POST)
+    public String processAddNewProductForm(@ModelAttribute("newProduct") Product product){
+        productService.addProduct(product);
+        return "redirect:/products";
     }
 }
 

@@ -40,7 +40,7 @@ public class Product implements Serializable{
     private long unitsInStock;
     private long unitsInOrder;
     private boolean discontinued;
-    //private String condition;
+    private String status;
 
     public Product() {
         super();
@@ -167,6 +167,15 @@ public class Product implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
     
     
 }
