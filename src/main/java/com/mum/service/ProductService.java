@@ -16,7 +16,9 @@ public interface ProductService {
 
     public List<Product> getAllProducts();
 
-    public Product getProductById(String productID);
+    public Product getProductById(String productID,long quantity);
     
     public List<Product> getAllProductsDetails(); 
+    
+    public List<Product> getProductsByCategory(String category);
 }

@@ -12,8 +12,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+         <script src="resources/js/test.js"></script>
+            <link rel="stylesheet" href="resources/css/main.css"/>
     </head>
     <body>
+        <h1>TEST</h1>
         <section>
             <div class="jumbotron">
                 <div class="container">

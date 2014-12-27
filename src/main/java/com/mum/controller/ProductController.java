@@ -14,6 +14,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -27,8 +28,15 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping("/products")
-    public String list(Model model) {       
+    public String list(Model model) {    
         model.addAttribute("products",productService.getAllProductsDetails());
+        return "products";
+    }
+    
+    @RequestMapping("/products/{category}")
+    public String getProductsByCategory(Model model,@PathVariable("category")String productCategory){
+        System.out.println("Category");
+        model.addAttribute("products", productService.getProductsByCategory(productCategory));
         return "products";
     }
 }

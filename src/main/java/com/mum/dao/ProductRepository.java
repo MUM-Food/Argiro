@@ -9,6 +9,8 @@ import com.mum.utils.SessionUtil;
 import com.mum.domain.Product;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -21,27 +23,7 @@ public class ProductRepository extends SessionUtil implements ProductRepositoryL
     private List<Product> listOfProducts = new ArrayList<Product>();
 
     public ProductRepository() {
-        //Product iphone = new Product("P1234", "iPhone 5s", new BigDecimal(500));
-         Product iphone = new Product();
-        iphone.setDescription("Apple iPhone 5s smartphone with 4.00-inch 640x1136 display and 8-megapixel rear camera");
-        iphone.setCategory("Smart Phone");
-        iphone.setManufacturer("Apple");
-        iphone.setUnitsInStock(1000);
-       // Product laptop_dell = new Product("P1235", "Dell Inspiron", new BigDecimal(700));
-          Product laptop_dell = new Product();
-        laptop_dell.setDescription("Dell Inspiron 14-inch Laptop(Black) with 3rd Generation Intel Core processors");
-        laptop_dell.setCategory("Laptop");
-        laptop_dell.setManufacturer("Dell");
-        laptop_dell.setUnitsInStock(1000);
-        //Product tablet_Nexus = new Product("P1236", "Nexus 7", new BigDecimal(300));
-         Product tablet_Nexus = new Product();
-        tablet_Nexus.setDescription("Google Nexus 7 is the lightest 7 inch tablet With a quad - core Qualcomm Snapdragon ™ S4 Proprocessor");
-        tablet_Nexus.setCategory("Tablet");
-        tablet_Nexus.setManufacturer("Google");
-        tablet_Nexus.setUnitsInStock(1000);
-        listOfProducts.add(iphone);
-        listOfProducts.add(laptop_dell);
-        listOfProducts.add(tablet_Nexus);
+       
     }
 
     @Override
@@ -50,19 +32,35 @@ public class ProductRepository extends SessionUtil implements ProductRepositoryL
     }
 
     @Override
-    public Product getProductById(String productID) {
-        System.out.println("Get Productby id");
-        for(Product p:listOfProducts){
-            if(p.getProductId().equals(productID)){
-                return p;
-            }
+    public Product getProductById(String productID,long quantity) {
+        Criteria cr=getSession().createCriteria(Product.class);
+        cr.add(Restrictions.eq("productId", productID));
+        Product product=(Product) cr.uniqueResult();
+        if(product.getUnitsInStock()< quantity){
+            throw new IllegalArgumentException("Out of Stock. Available Units in stock"+ product.getUnitsInStock());
         }
-        return null;
+        product.setUnitsInStock(product.getUnitsInStock() - quantity);      
+        return product;
+//        for(Product p:listOfProducts){
+//            if(p.getProductId().equals(productID)){
+//                return p;
+//            }
+//        }
+//        return null;
     }
 
     @Override
     public List<Product> getAllProductsDetails() {
         return getSession().createCriteria(Product.class).list();
+    }
+
+    @Override
+    public List<Product> getProductsByCategory(String category) {
+        Criteria cr=getSession().createCriteria(Product.class);
+       // List<Product> products= (List<Product>) cr.uniqueResult();
+         cr.add(Restrictions.eq("category", category)); 
+         List<Product> products= (List<Product>) cr.list();
+        return products;
     }
 
 }

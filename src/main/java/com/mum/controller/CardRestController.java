@@ -38,18 +38,21 @@ public class CardRestController {
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
     Card create(@RequestBody Card card) {
+        System.out.println("Call Create method");
         return cardServiceImpl.create(card);
     }
 
     @RequestMapping(value = "/{cardId}", method = RequestMethod.GET)
     public @ResponseBody
     Card read(@PathVariable(value = "cardId") String cardId) {
+        System.out.println("Read");
         return cardServiceImpl.read(cardId);
     }
 
     @RequestMapping(value = "/{cardId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@PathVariable(value = "cardId") String cardId, @RequestBody Card card) {
+         System.out.println("Update");
         cardServiceImpl.update(cardId, card);
 
     }
@@ -57,18 +60,20 @@ public class CardRestController {
     @RequestMapping(value = "/{cardId}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable(value = "cardId") String cardId) {
+         System.out.println("Delete");
         cardServiceImpl.delete(cardId);
     }
 
     @RequestMapping(value = "/add/{productId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void addItem(@PathVariable String productId, HttpServletRequest request) {
+         System.out.println("AddItem");
         String sessionId = request.getSession(true).getId();
         Card card = cardServiceImpl.read(productId);
         if (card == null) {
             card = cardServiceImpl.create(new Card(sessionId));
         }
-        Product product = productServiceImpl.getProductById(productId);
+        Product product = productServiceImpl.getProductById(productId, 1);
         if (product == null) {
             //
             throw new IllegalArgumentException("some exception");
@@ -80,29 +85,30 @@ public class CardRestController {
     @RequestMapping(value = "remove/{productId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void removeItem(@PathVariable String productId, HttpServletRequest request) {
+         System.out.println("RemoveItem");
         String sessionId = request.getSession(true).getId();
         Card card = cardServiceImpl.read(sessionId);
         if (card == null) {
             cardServiceImpl.create(new Card(sessionId));
         }
-        Product product = productServiceImpl.getProductById(productId);
+        Product product = productServiceImpl.getProductById(productId, 1);
         if (product == null) {
             //
             throw new IllegalArgumentException("some exception");
         }
         card.removeCartItem(new CardItem(product));
         cardServiceImpl.update(sessionId, card);
-      }
-        @ExceptionHandler(IllegalArgumentException.class)
-        @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Illegal request, please verify your payload")
-        
-        public void handleClientErrors(Exception ex) {
-        }
-        @ExceptionHandler(Exception.class)
-        @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,reason = "Internal server error")
-        public void handleServerErrors(Exception ex) {
-        }
+    }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Illegal request, please verify your payload")
 
-    
+    public void handleClientErrors(Exception ex) {
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Internal server error")
+    public void handleServerErrors(Exception ex) {
+    }
+
 }

@@ -13,9 +13,12 @@
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/
               bootstrap/3.0.0/css/bootstrap.min.css">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="resources/css/main.css"/>
     </head>
     <body>
+         <h1>BBBBBBB</h1>
         <section>
+            <h1>TTTTTTTTTTTTTT</h1>
             <div class="jumbotron">
                 <div class="container">
                     <h1>${greeting}</h1>

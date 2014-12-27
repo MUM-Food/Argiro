@@ -29,13 +29,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(String productID) {
-        return productRepository.getProductById(productID);
+    public Product getProductById(String productID,long quantity) {
+        return productRepository.getProductById(productID,quantity);
     }
 
     @Override
     public List<Product> getAllProductsDetails() {
        return productRepository.getAllProductsDetails();
+    }
+
+    @Override
+    public List<Product> getProductsByCategory(String category) {
+        return productRepository.getProductsByCategory(category);
     }
 
 }
