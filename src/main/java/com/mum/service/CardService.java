@@ -5,49 +5,21 @@
  */
 package com.mum.service;
 
-import com.mum.dao.CardRepositoryLocal;
 import com.mum.domain.Card;
-import com.mum.exception.InvalidCardException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  *
  * @author sunil
  */
-@Service
-public class CardService implements CardServiceImpl {
+public interface CardService {
 
-    @Autowired
-    private CardRepositoryLocal cardRepositoryLocal;
+    Card create(Card card);
 
-    @Override
-    public Card create(Card card) {
-        return cardRepositoryLocal.create(card);
-    }
+    Card read(String cardId);
 
-    @Override
-    public Card read(String cardId) {
-        return cardRepositoryLocal.read(cardId);
-    }
+    void update(String cardId, Card card);
 
-    @Override
-    public void update(String cardId, Card card) {
-        cardRepositoryLocal.update(cardId, card);
-    }
-
-    @Override
-    public void delete(String cardId) {
-        cardRepositoryLocal.delete(cardId);
-    }
-
-    @Override
-    public Card validate(String cartId) {
-        Card cart = cardRepositoryLocal.read(cartId);
-        if (cart == null || cart.getCartItems().size() == 0) {
-            throw new InvalidCardException(cartId);
-        }
-        return cart;
-    }
-
+    void delete(String cardId);
+    
+    Card validate(String cartId);
 }

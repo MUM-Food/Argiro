@@ -35,10 +35,13 @@ public class ProductController {
         model.addAttribute("products", productService.getProductsByCategory(productCategory));
         return "products";
     }
-    @RequestMapping("/products")
+    
+    
+    @RequestMapping("/products/product")
     public String getProductById(@RequestParam("id")String productId,Model model){
-        //model.addAttribute("product",productService.getProductById(productId, quantity));
-        return "products";
+        System.out.println("Product  id is "+productId);
+        model.addAttribute("product",productService.getProductById(productId));
+        return "product";
     }
 }
 

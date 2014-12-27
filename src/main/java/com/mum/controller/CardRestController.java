@@ -8,7 +8,7 @@ package com.mum.controller;
 import com.mum.domain.Card;
 import com.mum.domain.CardItem;
 import com.mum.domain.Product;
-import com.mum.service.CardServiceImpl;
+import com.mum.service.CardService;
 import com.mum.service.ProductServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class CardRestController {
 
     @Autowired
-    private CardServiceImpl cardServiceImpl;
+    private CardService cardServiceImpl;
     @Autowired
     private ProductServiceImpl productServiceImpl;
 
@@ -73,7 +73,8 @@ public class CardRestController {
         if (card == null) {
             card = cardServiceImpl.create(new Card(sessionId));
         }
-        Product product = productServiceImpl.getProductById(productId, 1);
+       // Product product = productServiceImpl.getProductById(productId,);
+        Product product = productServiceImpl.getProductById(productId);
         if (product == null) {
             //
             throw new IllegalArgumentException("some exception");
@@ -91,7 +92,8 @@ public class CardRestController {
         if (card == null) {
             cardServiceImpl.create(new Card(sessionId));
         }
-        Product product = productServiceImpl.getProductById(productId, 1);
+        //Product product = productServiceImpl.getProductById(productId, 1);
+        Product product = productServiceImpl.getProductById(productId);
         if (product == null) {
             //
             throw new IllegalArgumentException("some exception");

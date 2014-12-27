@@ -24,4 +24,18 @@
         <property name="prefix" value="/WEB-INF/views/" />
         <property name="suffix" value=".jsp" />
     </bean>
+    
+<!--    <webflow-config:flow-executor id="flowExecutor" flowregistry="flowRegistry" />-->
+    <!--<webflow-config:flow-executor id="flowExecutor" flowregistry="flowRegistry" />-->
+<!--    <webflow-config:flow-registry id="flowRegistry" base-path="/WEB-INF/">
+        <webflow-config:flow-location path="/checkout-flow.xml" id="checkout"/>
+    </webflow-config:flow-registry>-->
+    
+<!--    <bean id="flowHandlerMapping" class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+        <property name="flowRegistry" ref="flowRegistry" />
+    </bean>
+    <bean id="flowHandlerAdapter" class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+        <property name="flowExecutor" ref="flowExecutor" />
+    </bean>-->
+    
 </beans>

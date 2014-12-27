@@ -20,15 +20,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService{
-    @Autowired
-    private ProductRepositoryLocal productRepositoryLocal;
     
     @Autowired
     private OrderRepositoryLocal orderRepositoryLocal;
+    
+    @Autowired
+    private ProductRepositoryLocal productRepositoryLocal;
+    
+    
 
     @Override
     public Product getProductById(String productID,long quantity) {
-        return productRepositoryLocal.getProductById(productID,quantity);
+        //return productRepositoryLocal.getProductById(productID,quantity);
+        return productRepositoryLocal.getProductById(productID);
     }
 
     @Override

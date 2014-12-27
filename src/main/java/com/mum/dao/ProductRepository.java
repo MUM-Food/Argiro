@@ -32,14 +32,15 @@ public class ProductRepository extends SessionUtil implements ProductRepositoryL
     }
 
     @Override
-    public Product getProductById(String productID,long quantity) {
+    public Product getProductById(String productID) {
+    //public Product getProductById(String productID,long quantity) {
         Criteria cr=getSession().createCriteria(Product.class);
         cr.add(Restrictions.eq("productId", productID));
         Product product=(Product) cr.uniqueResult();
-        if(product.getUnitsInStock()< quantity){
-            throw new IllegalArgumentException("Out of Stock. Available Units in stock"+ product.getUnitsInStock());
-        }
-        product.setUnitsInStock(product.getUnitsInStock() - quantity);      
+//        if(product.getUnitsInStock()< quantity){
+//            throw new IllegalArgumentException("Out of Stock. Available Units in stock"+ product.getUnitsInStock());
+//        }
+//        product.setUnitsInStock(product.getUnitsInStock() - quantity);      
         return product;
 //        for(Product p:listOfProducts){
 //            if(p.getProductId().equals(productID)){

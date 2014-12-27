@@ -9,11 +9,13 @@ import com.mum.domain.Order;
 import com.mum.utils.SessionUtil;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author sunil
  */
+@Repository
 public class OrderRepository extends SessionUtil implements OrderRepositoryLocal{
 
     
