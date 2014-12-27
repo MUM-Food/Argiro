@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mum.service;
+package com.mum.dao;
 
 import com.mum.domain.Order;
-import com.mum.domain.Product;
 
 /**
  *
  * @author sunil
  */
-public interface OrderService {
-     public Product getProductById(String productID,long quantity);
-     Long saveOrder(Order order);
+public interface OrderRepositoryLocal {
+    Long saveOrder(Order order);
 }

@@ -20,4 +20,6 @@ public interface CardServiceImpl {
     void update(String cardId, Card card);
 
     void delete(String cardId);
+    
+    Card validate(String cartId);
 }

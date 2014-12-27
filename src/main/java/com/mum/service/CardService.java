@@ -7,6 +7,7 @@ package com.mum.service;
 
 import com.mum.dao.CardRepositoryLocal;
 import com.mum.domain.Card;
+import com.mum.exception.InvalidCardException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,8 @@ import org.springframework.stereotype.Service;
  * @author sunil
  */
 @Service
-public class CardService implements CardServiceImpl{
-    
+public class CardService implements CardServiceImpl {
+
     @Autowired
     private CardRepositoryLocal cardRepositoryLocal;
 
@@ -39,5 +40,14 @@ public class CardService implements CardServiceImpl{
     public void delete(String cardId) {
         cardRepositoryLocal.delete(cardId);
     }
-    
+
+    @Override
+    public Card validate(String cartId) {
+        Card cart = cardRepositoryLocal.read(cartId);
+        if (cart == null || cart.getCartItems().size() == 0) {
+            throw new InvalidCardException(cartId);
+        }
+        return cart;
+    }
+
 }

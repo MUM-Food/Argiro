@@ -5,7 +5,9 @@
  */
 package com.mum.service;
 
+import com.mum.dao.OrderRepositoryLocal;
 import com.mum.dao.ProductRepositoryLocal;
+import com.mum.domain.Order;
 import com.mum.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderServiceImpl implements OrderService{
     @Autowired
     private ProductRepositoryLocal productRepositoryLocal;
+    
+    @Autowired
+    private OrderRepositoryLocal orderRepositoryLocal;
 
     @Override
     public Product getProductById(String productID,long quantity) {
         return productRepositoryLocal.getProductById(productID,quantity);
+    }
+
+    @Override
+    public Long saveOrder(Order order) {
+        return orderRepositoryLocal.saveOrder(order);
     }
     
 }

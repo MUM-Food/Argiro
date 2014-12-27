@@ -17,7 +17,6 @@
             <link rel="stylesheet" href="resources/css/main.css"/>
     </head>
     <body>
-        <h1>TEST</h1>
         <section>
             <div class="jumbotron">
                 <div class="container">
