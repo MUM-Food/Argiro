@@ -8,12 +8,14 @@ package com.mum.domain;
 import com.mum.utils.SessionUtil;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 import javax.validation.constraints.Size;
 
 /**
@@ -41,6 +43,8 @@ public class Product implements Serializable{
     private long unitsInOrder;
     private boolean discontinued;
     private String status;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date createdDate;
 
     public Product() {
         super();
@@ -174,6 +178,14 @@ public class Product implements Serializable{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
     
     
