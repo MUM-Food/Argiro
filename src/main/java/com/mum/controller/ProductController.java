@@ -64,7 +64,7 @@ public class ProductController {
         return "addProduct";
     }
 
-    @RequestMapping(value = "/products/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddNewProductForm(@ModelAttribute("newProduct") Product product, BindingResult result) {       
         String[] suppressedFields = result.getSuppressedFields();
         if (suppressedFields.length > 0) {
