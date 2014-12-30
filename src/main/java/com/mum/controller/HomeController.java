@@ -25,7 +25,7 @@ public class HomeController {
 
     @Autowired
     public FoodMenuService foodMenuService;
-    
+
     @RequestMapping("/")
     public String welcome(Model model) {
         model.addAttribute("greeting", "Welcome to Web Store!");
@@ -51,9 +51,9 @@ public class HomeController {
         return "addTodaysMenu";
     }
 
-    @RequestMapping(value ="addTodaysMenu" , method = RequestMethod.POST)
+    @RequestMapping(value = "addTodaysMenu", method = RequestMethod.POST)
     public String processTodaysMenuRegistration(@ModelAttribute("foodMenuForm") FoodMenu foodMenu) {
-        System.out.println("BreakFast " + foodMenu.getBreakFast()+" Tea Type "+foodMenu.getTeaType());
+        System.out.println("BreakFast " + foodMenu.getBreakFast() + " Tea Type " + foodMenu.getTeaType());
         foodMenuService.save(foodMenu);
         return "addTodaysMenu";
     }
@@ -73,4 +73,10 @@ public class HomeController {
 //        return "addTodaysMenu";
 //    }
 
+    @RequestMapping("/welcome/greeting")
+    public String greeting() {
+        System.out.println("GREETING");
+        return "forward:/welcome/greeting";
+       // return "welcome";
+    }
 }

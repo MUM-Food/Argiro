@@ -31,6 +31,10 @@
                 <c:forEach items="${products}" var="product">
                     <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
                         <div class="thumbnail">
+                            <div class="col-md-5">
+                                <img src="<c:url value="/resources/images/iphone.jpg">                                     
+                                     </c:url>" alt="image" style = "width:100%" />
+                            </div>
                             <div class="caption">
                                 <h3>${product.name}</h3>
                                 <p>${product.description}</p>

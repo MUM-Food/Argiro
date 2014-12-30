@@ -16,7 +16,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -45,6 +47,8 @@ public class Product implements Serializable{
     private String status;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdDate;
+   // @Transient
+    private String productImage;
 
     public Product() {
         super();
@@ -187,6 +191,16 @@ public class Product implements Serializable{
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
+    }
+
+    
     
     
     

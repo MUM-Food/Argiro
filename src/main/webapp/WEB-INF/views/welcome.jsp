@@ -16,9 +16,8 @@
         <link rel="stylesheet" href="resources/css/main.css"/>
     </head>
     <body>
-         <h1>BBBBBBB</h1>
         <section>
-            <h1>TTTTTTTTTTTTTT</h1>
+            <h1>Welcome Page</h1>
             <div class="jumbotron">
                 <div class="container">
                     <h1>${greeting}</h1>
