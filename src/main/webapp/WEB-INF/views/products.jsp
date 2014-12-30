@@ -21,7 +21,7 @@
         <section>
             <div class="jumbotron">
                 <div class="container">
-                    <h1>Products</h1>
+                    <h1>Products title change</h1>
                     <p>All the available products in our store</p>
                 </div>
             </div>
