@@ -48,7 +48,10 @@ public class Product implements Serializable{
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdDate;
    // @Transient
-    private String productImage;
+    //private String productImage;
+    @Transient
+    private MultipartFile productImage;
+    private String imageName;
 
     public Product() {
         super();
@@ -192,12 +195,28 @@ public class Product implements Serializable{
         this.createdDate = createdDate;
     }
 
-    public String getProductImage() {
+//    public String getProductImage() {
+//        return productImage;
+//    }
+//
+//    public void setProductImage(String productImage) {
+//        this.productImage = productImage;
+//    }
+
+    public MultipartFile getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(String productImage) {
+    public void setProductImage(MultipartFile productImage) {
         this.productImage = productImage;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     

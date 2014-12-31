@@ -7,14 +7,10 @@ package com.mum.controller;
 
 import com.mum.domain.Product;
 import com.mum.service.ProductService;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.File;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -26,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -45,7 +42,7 @@ public class ProductController {
 
     @RequestMapping("/products/{category}")
     public String getProductsByCategory(Model model, @PathVariable("category") String productCategory) {
-        System.out.println("Category");
+        System.out.println("Category---------");
         model.addAttribute("products", productService.getProductsByCategory(productCategory));
         return "products";
     }
@@ -59,27 +56,44 @@ public class ProductController {
 
     @RequestMapping(value = "/products/add", method = RequestMethod.GET)
     public String getAddNewProductForm(Model model) {
-        Product product = new Product();      
+        Product product = new Product();
+
         model.addAttribute("newProduct", product);
         return "addProduct";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddNewProductForm(@ModelAttribute("newProduct") Product product, BindingResult result) {       
+    @RequestMapping(value = "products/add", method = RequestMethod.POST)
+    public String processAddNewProductForm(@ModelAttribute("newProduct") Product product, BindingResult result, HttpServletRequest request, HttpServletResponse response) {
+        MultipartFile productImage = product.getProductImage();
+        String rootDirectory = request.getSession().getServletContext().getRealPath("/../../../");
+       
+        if (productImage != null && !productImage.isEmpty()) {
+            try {
+                 productImage.transferTo(new File(rootDirectory+"\\images\\"+productImage.getOriginalFilename()+ ".png"));               
+            } catch (Exception e) {
+                throw new RuntimeException("Product Image saving failed", e);
+            }
+        }
+
         String[] suppressedFields = result.getSuppressedFields();
         if (suppressedFields.length > 0) {
             throw new RuntimeException("Attempting to bind disallowed fields:" + StringUtils.arrayToCommaDelimitedString(suppressedFields));
         }
+        
+
         productService.addProduct(product);
         //return "redirect:/products/add";
-        return "redirect:/products";
+        //return "redirect:/products";
+        return "";
     }
 
     @InitBinder
-    public void initialiseBinder(WebDataBinder dataBinder) {
+    public void initialiseBinder(WebDataBinder dataBinder
+    ) {
 //        DateFormat dateFormat = new SimpleDateFormat("MMM d, YYYY");
 //        CustomDateEditor orderDateEditor = new CustomDateEditor(dateFormat, true);
 //        dataBinder.registerCustomEditor(Date.class,"createdDate",orderDateEditor);
         dataBinder.setDisallowedFields("unitsInOrder", "discontinued");
     }
+
 }
